@@ -10,18 +10,17 @@ export class AppComponent implements OnInit {
   users: any;
   constructor(private http: HttpClient) {}
   ngOnInit() {
-    this.getUsers()
+    this.getUsers();
   }
   getUsers() {
-    this.http.get('https://localhost:5001/api/users').subscribe(
-      (res) => {
-        console.log(res);
+    this.http.get('https://localhost:5001/api/users').subscribe({
+      next: (res) => {
         this.users = res;
       },
-      (err) => {
+      error: (err) => {
         console.log(err);
-      }
-    );
+      },
+    });
   }
   title = 'The Dating App';
 }
