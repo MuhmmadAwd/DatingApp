@@ -8,7 +8,7 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  loggedIn: boolean = false;
+  IsLoggedIn: boolean = false;
 
   constructor(private accountService: AccountService) {}
 
@@ -17,11 +17,15 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe({
       next: (response) => {
         console.log(response);
-        this.loggedIn = true;
+        this.IsLoggedIn = true;
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+
+  logout(){
+    this.IsLoggedIn = false
   }
 }
