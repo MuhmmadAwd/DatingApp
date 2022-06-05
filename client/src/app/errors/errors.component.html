@@ -17,4 +17,15 @@
   >
     Test 400 Validation Error
   </button>
+  <div class="mt-5" *ngIf="validationErrors.length > 0">
+    <div
+      *ngFor="let error of validationErrors"
+      class="card text-danger"
+      style="width: 20rem"
+    >
+      <div class="card-body">
+        <h6 class="card-title">{{error}}</h6>
+      </div>
+    </div>
+  </div>
 </ng-container>
