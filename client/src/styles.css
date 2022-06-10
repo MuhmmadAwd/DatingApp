@@ -24,13 +24,16 @@
   }
 
   .member-tabset > .nav-tabs > li.active {
-    border-bottom: 4px solid #E95420;
+    border-bottom: 4px solid #352b26;
     position: relative;
   }
 
   .member-tabset > .nav-tabs > li.active > a {
     border: 0 !important;
-    color: #333333;
+    color: #704040;
+  }
+  .member-tabset > .nav-tabs span{
+      color: #404040;
   }
 
   .member-tabset > .nav-tabs > li.active > a > i {

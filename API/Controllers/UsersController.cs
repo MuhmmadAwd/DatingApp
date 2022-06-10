@@ -27,7 +27,7 @@ namespace API.Controllers
             var users = await this.userRepository.GetMembersAsync();
             return Ok(users);
         }
-        [HttpGet("{id}")]
+        [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
             return await this.userRepository.GetMemberAsync(username);
