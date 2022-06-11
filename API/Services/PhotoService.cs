@@ -1,7 +1,9 @@
-﻿using API.Helpers;
+﻿using System.Threading.Tasks;
+using API.Helpers;
 using API.Interfaces;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
 namespace API.Services
@@ -9,14 +11,15 @@ namespace API.Services
     public class PhotoService : IPhotoService
     {
         private readonly Cloudinary cloudinary;
-        public PhotoService(IOptions<ClouldinarySettings> config)
+        public PhotoService(IOptions<CloudinarySettings> config)
         {
             var acc = new Account
-                (
+            (
                 config.Value.CloudName,
                 config.Value.ApiKey,
                 config.Value.ApiSecret
-                );
+            );
+
             this.cloudinary = new Cloudinary(acc);
         }
 
@@ -37,7 +40,6 @@ namespace API.Services
 
             return uploadResult;
         }
-
         public async Task<DeletionResult> DeletePhotoAsync(string publicId)
         {
             var deleteParams = new DeletionParams(publicId);
