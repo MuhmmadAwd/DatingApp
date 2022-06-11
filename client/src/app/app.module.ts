@@ -21,6 +21,8 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { LoadingSpinnerInterceptor } from './_interceptors/loading-spinner.interceptor';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +38,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
     ServerErrorComponent,
     MemberCardComponent,
     MemberEditComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingSpinnerInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
