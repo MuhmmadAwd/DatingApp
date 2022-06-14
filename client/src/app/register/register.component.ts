@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
+  FormBuilder,
   FormControl,
   FormGroup,
   ValidatorFn,
@@ -20,20 +21,23 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   constructor(
     private toastr: ToastrService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.initForm();
   }
   initForm() {
-    this.registerForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
-      confirmPassword: new FormControl('', [Validators.required, this.matchValue('password') ]),
+    this.registerForm = this.fb.group({
+      gender: ['male'],
+      username: ['', Validators.required],
+      knownAs: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, this.matchValue('password')]],
     });
     this.registerForm.controls.password.valueChanges.subscribe((value) => {
       this.registerForm.controls.confirmPassword.updateValueAndValidity();
