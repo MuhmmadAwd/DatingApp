@@ -45,7 +45,7 @@
     
       <a class="nav-link dropdown-toggle text-light" dropdownToggle
         >
-        <img src="{{user.photoUrl}}" alt="{{user.username}}">
+        <img src="{{user.photoUrl || './assets/user.png' }}" alt="{{user.username}}">
         Welcome {{ user.username | titlecase }}</a
       >
       <div class="dropdown-menu" *dropdownMenu>

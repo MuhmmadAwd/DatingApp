@@ -7,6 +7,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 
@@ -19,18 +20,20 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter<boolean>();
   model: any = {};
   registerForm: FormGroup;
-  maxDate:Date
+  maxDate: Date;
+  validationErrors: string[] = [];
 
   constructor(
     private toastr: ToastrService,
     private accountService: AccountService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.maxDate = new Date()
-    this.maxDate.setFullYear(this.maxDate.getFullYear() -18)
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
   initForm() {
     this.registerForm = this.fb.group({
@@ -57,17 +60,19 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
-    // this.accountService.register(this.model).subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //     this.onCancel();
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //     this.toastr.error(err.error.title)
-    //   },
-    // });
+    this.accountService.register(this.registerForm.value).subscribe({
+      next: (res) => {
+        this.router.navigateByUrl('/members');
+        this.onCancel();
+      },
+      error: (err) => {
+        this.validationErrors = err;
+        if(err.length == 1){
+          err[0] = "all fields are required"
+        }
+        this.toastr.error(err);
+      },
+    });
   }
   onCancel() {
     this.cancelRegister.emit(false);
