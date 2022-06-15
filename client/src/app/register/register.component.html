@@ -7,7 +7,13 @@
       <input type="radio" value="male" formControlName="gender" /> Male
     </label>
     <label class="radio-inline">
-      <input type="radio" value="female" formControlName="gender" class="ms-3" /> Female
+      <input
+        type="radio"
+        value="female"
+        formControlName="gender"
+        class="ms-3"
+      />
+      Female
     </label>
   </div>
   <app-text-input
@@ -18,10 +24,10 @@
     [formControl]="registerForm.controls['knownAs']"
     label="known As"
   ></app-text-input>
-  <app-text-input
+  <app-date-input
     [formControl]="registerForm.controls['dateOfBirth']"
-    label="Date Of Birth"
-  ></app-text-input>
+    label="Date Of Birth" [maxDate]="maxDate"
+  ></app-date-input>
   <app-text-input
     [formControl]="registerForm.controls['city']"
     label="City"

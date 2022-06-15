@@ -19,6 +19,8 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter<boolean>();
   model: any = {};
   registerForm: FormGroup;
+  maxDate:Date
+
   constructor(
     private toastr: ToastrService,
     private accountService: AccountService,
@@ -27,6 +29,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.maxDate = new Date()
+    this.maxDate.setFullYear(this.maxDate.getFullYear() -18)
   }
   initForm() {
     this.registerForm = this.fb.group({
