@@ -10,6 +10,7 @@ using AutoMapper;
 using System.Security.Claims;
 using API.Extensions;
 using API.Services;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -26,18 +27,29 @@ namespace API.Controllers
             this.mapper = mapper;
             this.photoService = photoService;
         }
+
+        //GetUsers
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
-            var users = await this.userRepository.GetMembersAsync();
+            var users = await this.userRepository.GetMembersAsync(userParams);
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize,
+                users.TotalCount, users.TotalPages);
             return Ok(users);
         }
+
+        //GetUser
+
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
             return await this.userRepository.GetMemberAsync(username);
 
         }
+
+        //UpdateUser
+
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
@@ -51,6 +63,8 @@ namespace API.Controllers
 
             return BadRequest("Failed to update user");
         }
+
+        //add-photo
 
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
@@ -83,6 +97,8 @@ namespace API.Controllers
 
         }
 
+        //set-main-photo/{photoId}
+
         [HttpPut("set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int photoId)
         {
@@ -100,6 +116,8 @@ namespace API.Controllers
 
             return BadRequest("Failed to set main photo");
         }
+
+        //delete-photo/{photoId}
 
         [HttpDelete("delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(int photoId)
