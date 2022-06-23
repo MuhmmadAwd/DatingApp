@@ -6,7 +6,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
-import { TimeagoModule } from 'ngx-timeago';
 @NgModule({
   declarations: [],
   imports: [
@@ -19,7 +18,6 @@ import { TimeagoModule } from 'ngx-timeago';
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
     FileUploadModule,
-    TimeagoModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
@@ -27,8 +25,7 @@ import { TimeagoModule } from 'ngx-timeago';
     TabsModule,
     FileUploadModule,
     BsDatepickerModule,
-    PaginationModule,
-    TimeagoModule
+    PaginationModule
 
   ],
 })
