@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "UserName": "Lisa",
         "Gender": "female",
@@ -51,7 +51,7 @@
         "Country": "Svalbard and Jan Mayen Islands",
         "Photos": [
             {
-                "Url": "https://randomuser.me/api/portraits/women/30.jpg",
+                "Url": "https://randomuser.me/api/portraits/women/14.jpg",
                 "IsMain": true
             }
         ]
@@ -70,7 +70,7 @@
         "Country": "Zimbabwe",
         "Photos": [
             {
-                "Url": "https://randomuser.me/api/portraits/women/60.jpg",
+                "Url": "https://randomuser.me/api/portraits/women/11.jpg",
                 "IsMain": true
             }
         ]

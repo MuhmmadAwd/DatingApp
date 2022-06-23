@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using API.Helpers;
 using API.Interfaces;
 using CloudinaryDotNet;
@@ -10,7 +10,7 @@ namespace API.Services
 {
     public class PhotoService : IPhotoService
     {
-        private readonly Cloudinary cloudinary;
+        private readonly Cloudinary _cloudinary;
         public PhotoService(IOptions<CloudinarySettings> config)
         {
             var acc = new Account
@@ -20,7 +20,7 @@ namespace API.Services
                 config.Value.ApiSecret
             );
 
-            this.cloudinary = new Cloudinary(acc);
+            _cloudinary = new Cloudinary(acc);
         }
 
         public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
@@ -35,16 +35,17 @@ namespace API.Services
                     File = new FileDescription(file.FileName, stream),
                     Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")
                 };
-                uploadResult = await this.cloudinary.UploadAsync(uploadParams);
+                uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }
 
             return uploadResult;
         }
+
         public async Task<DeletionResult> DeletePhotoAsync(string publicId)
         {
             var deleteParams = new DeletionParams(publicId);
 
-            var result = await this.cloudinary.DestroyAsync(deleteParams);
+            var result = await _cloudinary.DestroyAsync(deleteParams);
 
             return result;
         }
